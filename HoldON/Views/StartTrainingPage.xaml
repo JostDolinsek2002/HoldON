@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HoldON.Views.StartTrainingPage"
+             Title="Začni trening">
+    <VerticalStackLayout>
+        <Label Text="Začni trening"
+               FontSize="24"
+               FontAttributes="Bold" />
+
+        <Label Text="Tukaj bo potek ustvarjanja novega treninga."
+               Opacity="0.7" />
+
+        <Button Text="Nov trening (TODO)" />
+    </VerticalStackLayout>
+</ContentPage>

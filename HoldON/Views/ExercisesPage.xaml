@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HoldON.Views.ExercisesPage"
+             Title="Zbirka vaj">
+    <VerticalStackLayout>
+        <Label Text="Zbirka vaj"
+               FontSize="24"
+               FontAttributes="Bold" />
+
+        <Label Text="Tukaj bo seznam vaj in podrobnosti."
+               Opacity="0.7" />
+    </VerticalStackLayout>
+</ContentPage>

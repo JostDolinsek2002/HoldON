@@ -8,7 +8,7 @@ namespace HoldON
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new AppShell();
 
             _ = db.InitAsync();
         }
