@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HoldON.Views.AddExercisePage"
+             Title="Dodaj vajo">
+    
+    <VerticalStackLayout Padding="16" Spacing="10">
+        <Entry x:Name="NameEntry" Placeholder="Ime vaje"/>
+        <Entry x:Name="GroupEntry" Placeholder="Mišična skupina"/>
+        <Editor x:Name="DescEditor" Placeholder="Opis" AutoSize="TextChanges"/>
+        <Entry x:Name="MediaEntry" Placeholder="Media URL"/>
+
+        <Button Text="Shrani" Clicked="OnSaveClicked"/>
+    </VerticalStackLayout>
+</ContentPage>

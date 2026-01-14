@@ -3,14 +3,76 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HoldON.Views.StartTrainingPage"
              Title="Začni trening">
-    <VerticalStackLayout>
-        <Label Text="Začni trening"
-               FontSize="24"
-               FontAttributes="Bold" />
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="12">
 
-        <Label Text="Tukaj bo potek ustvarjanja novega treninga."
-               Opacity="0.7" />
+            <Frame CornerRadius="16" Padding="14" HasShadow="True">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Vnos serije" FontAttributes="Bold" FontSize="18"/>
+                    <Label Text="Izberi vajo in vnesi reps/weight. Shrani se v SQLite."
+                           FontSize="12" Opacity="0.7"/>
+                </VerticalStackLayout>
+            </Frame>
 
-        <Button Text="Nov trening (TODO)" />
-    </VerticalStackLayout>
+            <Picker Title="Izberi vajo"
+                    ItemsSource="{Binding Exercises}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedExercise}" />
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Entry Placeholder="Reps"
+                       Keyboard="Numeric"
+                       Text="{Binding RepsText}" />
+                <Entry Grid.Column="1"
+                       Placeholder="Weight (kg)"
+                       Keyboard="Numeric"
+                       Text="{Binding WeightText}" />
+            </Grid>
+
+            <Entry Placeholder="Rest (sekunde, opcijsko)"
+                   Keyboard="Numeric"
+                   Text="{Binding RestText}" />
+
+            <Button Text="Dodaj serijo"
+                    Command="{Binding AddSetCommand}" />
+
+            <Button Text="Zaključi trening (nov)"
+                    Command="{Binding NewSessionCommand}" />
+
+            <Label Text="Serije v treningu"
+                   FontAttributes="Bold"
+                   FontSize="16"
+                   Margin="0,8,0,0"/>
+
+            <CollectionView ItemsSource="{Binding Sets}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="12" Margin="0,6" CornerRadius="12">
+                            <Grid ColumnDefinitions="Auto,*,Auto">
+                                <Label Text="{Binding SetOrder}"
+                                       FontAttributes="Bold"
+                                       VerticalOptions="Center"/>
+
+                                <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                    <Label Text="{Binding ExerciseName}" FontAttributes="Bold"/>
+                                    <Label Text="{Binding Reps, StringFormat='Reps: {0}'}"
+                                           FontSize="12" Opacity="0.7"/>
+                                </VerticalStackLayout>
+
+                                <VerticalStackLayout Grid.Column="2" Spacing="2" HorizontalOptions="End">
+                                    <Label Text="{Binding Weight, StringFormat='{0} kg'}"
+                                           FontAttributes="Bold"
+                                           HorizontalTextAlignment="End"/>
+                                    <Label Text="{Binding RestSeconds, StringFormat='Rest: {0}s'}"
+                                           FontSize="12" Opacity="0.7"
+                                           HorizontalTextAlignment="End"/>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

@@ -1,16 +1,16 @@
 ﻿using HoldON.Data;
 
-namespace HoldON
+namespace HoldON;
+
+public partial class App : Application
 {
-    public partial class App : Application
+    public App(AppDatabase db)
     {
-        public App(AppDatabase db)
-        {
-            InitializeComponent();
+        InitializeComponent();
 
-            MainPage = new AppShell();
+        MainPage = new AppShell();
 
-            _ = db.InitAsync();
-        }
+        _ = db.SeedIfEmptyAsync();
+
     }
 }

@@ -2,13 +2,38 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HoldON.Views.ExercisesPage"
+             x:Name="ThisPage"
              Title="Zbirka vaj">
-    <VerticalStackLayout>
-        <Label Text="Zbirka vaj"
-               FontSize="24"
-               FontAttributes="Bold" />
+    <VerticalStackLayout Padding="16" Spacing="10">
 
-        <Label Text="Tukaj bo seznam vaj in podrobnosti."
-               Opacity="0.7" />
+        <SearchBar Placeholder="Išči vajo"
+                   Text="{Binding SearchText}" />
+
+        <Picker Title="Mišična skupina"
+                ItemsSource="{Binding Groups}"
+                SelectedItem="{Binding SelectedGroup}" />
+
+        <Button Text="Dodaj vajo"
+                Command="{Binding OpenAddCommand}" />
+
+        <CollectionView ItemsSource="{Binding Exercises}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="12" Margin="0,6" CornerRadius="12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Name}" FontAttributes="Bold"/>
+                                <Label Text="{Binding MuscleGroup}" FontSize="12" Opacity="0.7"/>
+                            </VerticalStackLayout>
+                            <Button Text="Odpri"
+                                    Grid.Column="1"
+                                    Command="{Binding Source={x:Reference ThisPage}, Path=BindingContext.OpenDetailCommand}"
+                                    CommandParameter="{Binding .}" />
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
     </VerticalStackLayout>
 </ContentPage>
