@@ -3,12 +3,101 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HoldON.Views.StatisticsPage"
              Title="Statistika">
-    <VerticalStackLayout>
-        <Label Text="Statistika"
-               FontSize="24"
-               FontAttributes="Bold" />
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="12">
 
-        <Label Text="Tukaj bo prikaz napredka, PR-jev in grafov."
-               Opacity="0.7" />
-    </VerticalStackLayout>
+            <Frame CornerRadius="16" Padding="14">
+                <VerticalStackLayout>
+                    <Label Text="Statistika"
+                           FontSize="20"
+                           FontAttributes="Bold" />
+                    <Label Text="Izberi vajo za ogled napredka."
+                           FontSize="12"
+                           Opacity="0.7" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Picker Title="Izberi vajo"
+                    ItemsSource="{Binding Exercises}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedExercise}" />
+
+            <!-- DEBUG: koliko vaj je naloženih -->
+            <Label Text="{Binding Exercises.Count, StringFormat='Exercises loaded: {0}'}"
+                   FontSize="12"
+                   Opacity="0.6" />
+
+            <!-- DEBUG: katera vaja je izbrana -->
+            <Label Text="{Binding SelectedExercise.Name, StringFormat='Selected: {0}'}"
+                   FontSize="12"
+                   Opacity="0.6" />
+
+            <!-- F5: normativi -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Picker Title="Spol"
+                        ItemsSource="{Binding GenderOptions}"
+                        SelectedItem="{Binding SelectedGender}" />
+
+                <Entry Grid.Column="1"
+                       Placeholder="Telesna teža (kg) – opcijsko"
+                       Keyboard="Numeric"
+                       Text="{Binding BodyWeightText}" />
+            </Grid>
+
+            <Frame CornerRadius="16" Padding="14">
+                <VerticalStackLayout>
+                    <Label Text="Normativ moči (F5)" FontSize="12" Opacity="0.7"/>
+                    <Label Text="{Binding LevelText}" FontSize="18" FontAttributes="Bold"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Frame CornerRadius="16" Padding="14">
+                    <VerticalStackLayout>
+                        <Label Text="PR (max teža)" FontSize="12" Opacity="0.7"/>
+                        <Label Text="{Binding PrText}" FontSize="20" FontAttributes="Bold"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame Grid.Column="1" CornerRadius="16" Padding="14">
+                    <VerticalStackLayout>
+                        <Label Text="Volumen" FontSize="12" Opacity="0.7"/>
+                        <Label Text="{Binding VolumeText}" FontSize="20" FontAttributes="Bold"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Text="Trend (zadnji treningi)"
+                       FontAttributes="Bold"
+                       FontSize="16" />
+                <Button Grid.Column="1"
+                        Text="Osveži"
+                        Command="{Binding RefreshCommand}" />
+            </Grid>
+
+            <CollectionView ItemsSource="{Binding Trend}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="12" Margin="0,6" CornerRadius="12">
+                            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                                <Label Text="{Binding DateText}"
+                                       FontAttributes="Bold" />
+                                <Label Grid.Column="1"
+                                       Text="{Binding VolumeText}" />
+                                <Label Grid.Column="2"
+                                       Text="{Binding MaxText}"
+                                       HorizontalTextAlignment="End"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="Če ni podatkov, najprej dodaj serije v 'Začni trening'."
+                   FontSize="12"
+                   Opacity="0.6" />
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

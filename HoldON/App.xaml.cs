@@ -11,6 +11,8 @@ public partial class App : Application
         MainPage = new AppShell();
 
         _ = db.SeedIfEmptyAsync();
+        _ = db.SeedDemoStatsIfEmptyAsync();
+        _ = db.SeedStrengthStandardsIfEmptyAsync();
 
     }
 }

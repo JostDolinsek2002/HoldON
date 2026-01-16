@@ -44,6 +44,10 @@ namespace HoldON
             builder.Services.AddSingleton<TrainingService>();
             builder.Services.AddTransient<StartTrainingViewModel>();
             builder.Services.AddTransient<StartTrainingPage>();
+            builder.Services.AddSingleton<StatsService>();
+            builder.Services.AddTransient<StatisticsViewModel>();
+            builder.Services.AddTransient<StatisticsPage>();
+
 
 
             return builder.Build();
